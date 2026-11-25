@@ -1,0 +1,689 @@
+/* Shared controls */
+.ui-select {
+  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 9px 32px 9px 12px;
+  font-size: 12px;
+  background-color: var(--surface);
+  color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23848c9e' stroke-width='1.5'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  max-width: 100%;
+}
+.ui-scroll {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  overscroll-behavior-inline: contain;
+}
+.ui-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.date-picker {
+  position: relative;
+  min-width: 0;
+}
+.date-picker .date-range {
+  gap: 5px;
+  padding: 0 9px;
+}
+.date-picker input {
+  width: 125px;
+}
+.date-picker input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.calendar-trigger {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 36px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.calendar-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 306px;
+  padding: 15px;
+  z-index: 70;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: var(--shadow-float);
+}
+.calendar-target {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.calendar-target > button:not(.icon-btn) {
+  padding: 8px 14px;
+  font-size: 12px;
+  border-radius: 7px;
+  color: var(--muted);
+}
+.calendar-target > button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.calendar-target .icon-btn {
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+}
+.calendar-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+.calendar-month strong {
+  font-size: 13px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  text-align: center;
+}
+.calendar-grid small {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 8px 0;
+}
+.calendar-grid button {
+  font-size: 12px;
+  border-radius: 7px;
+  min-height: 33px;
+}
+.calendar-grid button:hover {
+  background: var(--surface-hover);
+}
+.calendar-grid button.in-range {
+  background: var(--accent-soft);
+}
+.calendar-grid button.selected {
+  background: var(--accent);
+  color: var(--primary-foreground);
+}
+.calendar-popover > p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 13px;
+  line-height: 1.7;
+}
+:root[data-accent="custom"] {
+  --accent: color-mix(in srgb, var(--brand-color) 85%, #16223b);
+  --accent-hover: color-mix(in srgb, var(--brand-color) 75%, #101829);
+  --accent-soft: color-mix(in srgb, var(--brand-color) 10%, var(--surface));
+}
+:root[data-theme="dark"][data-accent="custom"] {
+  --accent: color-mix(in srgb, var(--brand-color) 65%, #fff);
+  --accent-hover: color-mix(in srgb, var(--brand-color) 45%, #fff);
+  --accent-soft: color-mix(in srgb, var(--brand-color) 18%, var(--surface));
+}
+.btn.primary {
+  background: var(--brand-color, var(--accent));
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+.color-grid > button {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+.color-grid > button[aria-pressed="true"] {
+  outline-color: var(--accent);
+}
+.custom-color {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.custom-color input[type="color"] {
+  width: 40px;
+  height: 38px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+}
+.custom-color input:not([type="color"]) {
+  width: 155px;
+  padding: 9px 10px;
+  font-size: 12px;
+  font-family: monospace;
+}
+.appearance-panel {
+  max-height: calc(100dvh - 90px);
+  overflow: auto;
+}
+/* Employee review cards */
+.posts-source-banner {
+  display: none;
+}
+.employee-post-cards {
+  display: grid;
+  gap: 20px;
+}
+.employee-card-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.employee-card-header > div:first-child {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.employee-card-header h2 {
+  font-size: 15px;
+  font-weight: 650;
+}
+.employee-card-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.employee-card-total {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+.employee-card-total strong {
+  font-size: 27px;
+  color: var(--accent);
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+.employee-card-total span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.employee-post-table {
+  min-width: 800px;
+}
+.employee-post-table td:nth-child(2) {
+  width: 30%;
+  min-width: 190px;
+}
+.employee-post-table td:last-child {
+  max-width: 250px;
+}
+.employee-post-card .table-footer {
+  padding: 12px 20px;
+}
+.employee-post-card .block {
+  font-size: 11px;
+}
+.employee-post-cards > .empty p {
+  font-size: 12px;
+  margin-top: 10px;
+}
+/* Login occupies one viewport. Decorative panel yields on small/short screens. */
+.login-v2 {
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  background: var(--canvas);
+}
+.login-visual {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 36px 48px;
+  background:
+    radial-gradient(ellipse at 15% 15%, #303d7188, transparent 60%),
+    linear-gradient(140deg, #101a33, #172646 70%, #243158);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+.login-visual > .brand {
+  z-index: 1;
+  align-self: flex-start;
+}
+.login-visual .brand-copy strong,
+.login-visual .brand-copy small {
+  color: #fff;
+}
+.login-visual .brand-logo {
+  width: 58px;
+  height: 58px;
+}
+.login-art {
+  position: relative;
+  flex: 1;
+  min-height: 120px;
+  max-height: 360px;
+  display: grid;
+  place-items: center;
+  margin: 15px 0;
+  isolation: isolate;
+}
+.art-orbit {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid #8ba0e83b;
+  transform: rotateX(30deg) rotate(-25deg);
+  box-shadow:
+    0 0 70px #647ce414,
+    inset 0 0 35px #6275e40c;
+}
+.orbit-two {
+  width: 330px;
+  height: 330px;
+  transform: rotateX(40deg) rotate(20deg);
+  border-style: dashed;
+  opacity: 0.5;
+}
+.orbit-three {
+  width: 180px;
+  height: 180px;
+  transform: rotateX(15deg);
+  background: radial-gradient(circle, #6872c81a, transparent);
+}
+.art-center {
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  border: 1px solid #a5b5ff44;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #7384f42c, #41cfeb12);
+  transform: rotate(-8deg);
+  color: #b2c6ff;
+  box-shadow: 0 25px 60px #0003;
+}
+.art-center svg {
+  transform: rotate(8deg);
+}
+.art-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #223356e6;
+  border: 1px solid #9eb4f026;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 11px;
+  box-shadow: 0 12px 30px #0002;
+}
+.art-tag svg {
+  color: #8db5ff;
+}
+.art-tag-one {
+  left: 4%;
+  top: 24%;
+  transform: rotate(-5deg);
+}
+.art-tag-two {
+  right: 0;
+  bottom: 12%;
+  transform: rotate(4deg);
+}
+.login-manifesto {
+  z-index: 1;
+  margin-top: auto;
+  padding-bottom: 30px;
+}
+.login-manifesto > span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #a7b9e6;
+}
+.login-manifesto h1 {
+  font-size: clamp(32px, 3.8vw, 58px);
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: -1.8px;
+  margin: 16px 0;
+}
+.login-manifesto p {
+  font-size: 13px;
+  color: #afbedc;
+  line-height: 1.8;
+}
+.login-visual-foot {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: #7d91bb;
+}
+.login-access {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 65px 32px;
+  background: var(--surface);
+  min-width: 0;
+}
+.login-v2-appearance {
+  position: absolute;
+  right: 25px;
+  top: 23px;
+  z-index: 20;
+}
+.login-card {
+  width: 100%;
+  max-width: 350px;
+}
+.login-overline {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.login-card h2 {
+  font-size: 33px;
+  letter-spacing: -1px;
+  font-weight: 600;
+  margin: 12px 0 9px;
+}
+.login-card > p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 29px;
+}
+.login-card > label {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  margin: 17px 0 8px;
+}
+.login-card input {
+  width: 100%;
+  min-height: 45px;
+  padding: 12px;
+  font-size: 14px;
+}
+.login-password {
+  position: relative;
+}
+.login-password input {
+  padding-right: 43px;
+}
+.login-password button {
+  position: absolute;
+  right: 13px;
+  top: 14px;
+  color: var(--muted);
+}
+.login-error {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--danger);
+  min-height: 28px;
+  padding-top: 6px;
+}
+.login-card > .btn {
+  min-height: 45px;
+  justify-content: space-between;
+}
+.login-card > small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 22px;
+}
+.login-access-foot {
+  position: absolute;
+  bottom: 25px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.login-mobile-brand {
+  display: none;
+}
+@media (max-width: 900px) {
+  .login-visual {
+    padding: 30px;
+  }
+  .login-art {
+    transform: scale(0.8);
+    margin-inline: -25px;
+  }
+  .login-manifesto h1 {
+    font-size: 38px;
+  }
+  .date-picker {
+    flex-shrink: 0;
+  }
+  .employee-card-header {
+    padding: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .date-picker {
+    grid-column: 1/-1;
+    grid-row: 2;
+    width: 100%;
+  }
+  .date-picker .date-range {
+    width: 100%;
+    gap: 4px;
+  }
+  .date-picker input {
+    width: calc(50% - 27px);
+    font-size: 12px;
+  }
+  .calendar-popover {
+    width: min(306px, calc(100vw - 32px));
+  }
+  .employee-card-header {
+    padding: 16px;
+    gap: 10px;
+  }
+  .employee-card-header h2 {
+    font-size: 13px;
+  }
+  .employee-card-header .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  .employee-card-total {
+    display: block;
+    text-align: right;
+  }
+  .employee-card-total strong {
+    font-size: 24px;
+    display: block;
+  }
+  .employee-card-total span {
+    font-size: 9px;
+  }
+  .employee-post-table {
+    min-width: 740px;
+  }
+  .login-v2 {
+    grid-template-columns: 1fr;
+  }
+  .login-visual {
+    display: none;
+  }
+  .login-access {
+    padding: 75px 28px 45px;
+  }
+  .login-mobile-brand {
+    display: block;
+    position: absolute;
+    left: 25px;
+    top: 20px;
+  }
+  .login-mobile-brand .brand-copy {
+    display: none;
+  }
+  .login-mobile-brand .brand-logo {
+    width: 46px;
+    height: 46px;
+  }
+  .login-v2-appearance {
+    right: 22px;
+    top: 24px;
+  }
+  .login-card {
+    max-width: 350px;
+  }
+  .login-card h2 {
+    font-size: 29px;
+  }
+  .login-card > p {
+    margin-bottom: 23px;
+  }
+  .login-card input {
+    font-size: 16px;
+  }
+  .login-access-foot {
+    bottom: 17px;
+  }
+  .color-grid {
+    gap: 6px;
+  }
+  .color-grid > button {
+    width: 26px;
+    height: 26px;
+  }
+}
+@media (max-height: 700px) and (min-width: 601px) {
+  .login-visual {
+    padding: 24px 35px;
+  }
+  .login-art {
+    transform: scale(0.65);
+    margin-block: -30px;
+    min-height: 80px;
+  }
+  .login-manifesto {
+    padding-bottom: 16px;
+  }
+  .login-manifesto h1 {
+    font-size: 34px;
+  }
+  .login-access {
+    padding: 40px 30px;
+  }
+  .login-card > p {
+    margin-bottom: 18px;
+  }
+  .login-card > label {
+    margin-top: 12px;
+  }
+  .login-access-foot {
+    bottom: 15px;
+  }
+}
+@media (max-height: 570px) {
+  .login-card h2 {
+    font-size: 24px;
+    margin: 7px 0;
+  }
+  .login-card > p {
+    margin-bottom: 12px;
+  }
+  .login-card > label {
+    margin-top: 10px;
+  }
+  .login-card input {
+    min-height: 39px;
+    padding: 9px 12px;
+  }
+  .login-card > small {
+    margin-top: 10px;
+  }
+  .login-access {
+    padding: 62px 25px 24px;
+  }
+  .login-access-foot {
+    display: none;
+  }
+  .login-manifesto h1 {
+    font-size: 30px;
+  }
+  .login-art {
+    display: none;
+  }
+}
+:root[data-accent="custom"],
+:root[data-theme="dark"][data-accent="custom"] {
+  --accent: var(--readable-accent, var(--brand-color));
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, var(--ink));
+}
+@media (max-height: 500px) {
+  .login-access {
+    padding: 20px 28px;
+  }
+  .login-card {
+    max-width: 320px;
+  }
+  .login-overline,
+  .login-card > p,
+  .login-card > small {
+    display: none;
+  }
+  .login-card h2 {
+    font-size: 23px;
+    margin: 4px 0 12px;
+  }
+  .login-card > label {
+    margin: 8px 0 5px;
+    font-size: 11px;
+  }
+  .login-card input {
+    min-height: 36px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .login-card > .btn {
+    min-height: 37px;
+  }
+  .login-password button {
+    top: 10px;
+  }
+  .login-error {
+    min-height: 24px;
+  }
+  .login-access-foot {
+    display: none;
+  }
+  .login-v2-appearance {
+    top: 12px;
+    right: 14px;
+  }
+  .login-mobile-brand {
+    top: 12px;
+    left: 15px;
+  }
+  .login-mobile-brand .brand-logo {
+    width: 35px;
+    height: 35px;
+  }
+}

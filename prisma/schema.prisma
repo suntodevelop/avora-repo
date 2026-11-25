@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model User {
+  id String @id
+  email String @unique
+  name String
+  phone String @default("")
+  address String @default("")
+  avatarUrl String @default("")
+  passwordHash String
+  role String @default("user")
+  facebookUserId String? @unique
+  facebookName String @default("")
+  facebookUrl String @default("")
+  assignments EmployeeFanpage[]
+  posts Post[]
+  manualChecks ManualCheck[]
+  @@map("users")
+}
+model Fanpage {
+  id String @id
+  name String
+  pageId String? @unique
+  url String
+  tokenEncrypted String @default("")
+  source String @default("mock")
+  lastSync String?
+  syncedDates String[] @default([])
+  fullSync Boolean @default(false)
+  managerFacebookName String @default("")
+  managerFacebookUrl String @default("")
+  trackingStatus String @default("")
+  topic String @default("")
+  note String @default("")
+  employees EmployeeFanpage[]
+  posts Post[]
+  manualChecks ManualCheck[]
+  @@map("fanpages")
+}
+model EmployeeFanpage {
+  userId String
+  fanpageId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fanpage Fanpage @relation(fields: [fanpageId], references: [id], onDelete: Cascade)
+  @@id([userId, fanpageId])
+  @@map("employee_fanpages")
+}
+model Post {
+  id String @id
+  fanpageId String
+  employeeId String?
+  message String
+  createdTime DateTime
+  postDate String
+  postHour Int
+  permalinkUrl String
+  likes Int @default(0)
+  likesAvailable Boolean @default(true)
+  commentsAvailable Boolean @default(true)
+  comments Int @default(0)
+  shares Int @default(0)
+  attribution String
+  status String @default("pending")
+  note String @default("")
+  fanpage Fanpage @relation(fields: [fanpageId], references: [id], onDelete: Cascade)
+  employee User? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  @@index([fanpageId, postDate])
+  @@index([employeeId, postDate])
+  @@map("posts")
+}
+model Setting {
+  id String @id @default("main")
+  companyWide Boolean @default(false)
+  cronEnabled Boolean @default(false)
+  @@map("settings")
+}
+model ManualCheck {
+  id String @id
+  fanpageId String
+  employeeId String?
+  date String
+  postCount Int?
+  commentCount Int?
+  postCountRaw String @default("")
+  commentCountRaw String @default("")
+  checked Boolean @default(false)
+  note String @default("")
+  sourceFile String
+  sourceSheet String
+  sourceRow Int
+  fanpage Fanpage @relation(fields: [fanpageId], references: [id], onDelete: Cascade)
+  employee User? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  @@index([fanpageId, date])
+  @@index([employeeId, date])
+  @@map("manual_checks")
+}

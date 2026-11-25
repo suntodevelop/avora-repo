@@ -1,0 +1,92 @@
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "staff" | "user";
+  passwordHash: string;
+  phone?: string;
+  address?: string;
+  avatarUrl?: string;
+  facebookUserId?: string | null;
+  facebookName?: string;
+  facebookUrl?: string;
+};
+export type Fanpage = {
+  id: string;
+  name: string;
+  pageId: string | null;
+  url: string;
+  tokenEncrypted: string;
+  source: "mock" | "manual" | "facebook";
+  lastSync: string | null;
+  syncedDates?: string[];
+  fullSync?: boolean;
+  employeeIds: string[];
+  managerFacebookName?: string;
+  managerFacebookUrl?: string;
+  trackingStatus?: string;
+  topic?: string;
+  note?: string;
+};
+export type ManualCheck = {
+  id: string;
+  fanpageId: string;
+  employeeId: string | null;
+  date: string;
+  postCount: number | null;
+  commentCount: number | null;
+  postCountRaw: string;
+  commentCountRaw: string;
+  checked: boolean;
+  note: string;
+  sourceFile: string;
+  sourceSheet: string;
+  sourceRow: number;
+};
+export type Post = {
+  id: string;
+  fanpageId: string;
+  employeeId: string | null;
+  message: string;
+  createdTime: string;
+  postDate: string;
+  postHour: number;
+  permalinkUrl: string;
+  likes: number;
+  likesAvailable?: boolean;
+  commentsAvailable?: boolean;
+  comments: number;
+  shares: number;
+  attribution: string;
+  status: "pending" | "approved" | "flagged";
+  note: string;
+};
+export type Store = {
+  users: User[];
+  fanpages: Fanpage[];
+  posts: Post[];
+  manualChecks: ManualCheck[];
+  settings: { companyWide: boolean; cronEnabled: boolean };
+};
+export type PublicUser = Omit<User, "passwordHash">;
+export type Snapshot = {
+  viewer: PublicUser;
+  users: PublicUser[];
+  fanpages: Omit<Fanpage, "tokenEncrypted">[];
+  posts: Post[];
+  manualChecks: ManualCheck[];
+  settings: Store["settings"];
+  mode: string;
+};
+export type CountSummary = {
+  viewer: Pick<User, "id" | "name" | "role">;
+  rows: {
+    employeeId: string;
+    name: string;
+    posts: number;
+    missingCounts: number;
+    hasCounts: boolean;
+  }[];
+  totalPosts: number;
+  missingCounts: number;
+};
